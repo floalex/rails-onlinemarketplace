@@ -1,0 +1,1 @@
+An Ruby on Rails clone project for Etsy.
