@@ -1,7 +1,7 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
   # before a user can take any of the selected actions, we need to authenticate them first by making sure that they are signed in
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :authenticate_user!, only: [:seller, :new, :create, :edit, :update, :destroy]
   before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /listings
@@ -63,6 +63,10 @@ class ListingsController < ApplicationController
       format.html { redirect_to listings_url, notice: 'Listing was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+  
+  def seller
+    @listings = Listing.where(user: current_user).order("created_at DESC")
   end
 
   private
