@@ -1,5 +1,8 @@
 class ListingsController < ApplicationController
   before_action :set_listing, only: [:show, :edit, :update, :destroy]
+  # before a user can take any of the selected actions, we need to authenticate them first by making sure that they are signed in
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :correct_user, only: [:edit, :update, :destroy]
 
   # GET /listings
   # GET /listings.json
@@ -71,5 +74,11 @@ class ListingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def listing_params
       params.require(:listing).permit(:name, :description, :price, :image)
+    end
+  
+    def correct_user
+      if current_user != @lising.user
+        redirect_to root_url, alert: "Sorry, this listing belongs to someone else."
+      end
     end
 end
