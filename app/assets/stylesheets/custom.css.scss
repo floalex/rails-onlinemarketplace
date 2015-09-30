@@ -1,6 +1,12 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
+.jumbotron {
+  h1, h2 {
+    font-family: guardian-egyptt, georgia, serif;
+  }
+}
+
 body {
   background-color: #F5F5F1;
   color: #333333;
