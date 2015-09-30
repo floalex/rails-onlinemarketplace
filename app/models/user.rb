@@ -7,4 +7,6 @@ class User < ActiveRecord::Base
   validates :name, presence: true
   
   has_many :lisings, dependent: :destroy
+  has_many :sales, class_name: "Order"
+  has_many :purchases, class_name: "Order"
 end
